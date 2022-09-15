@@ -18,6 +18,8 @@ new_england_map = {
 
 def parse_msw_stars(url):
     response = requests.get(url)
+    if not response:
+        return None, -1, -1, -1
     wp = response.text
     soup = BeautifulSoup(wp, 'html.parser')
     star = soup.find(name='ul', class_='rating rating-large clearfix')
@@ -44,13 +46,23 @@ def get_data(spot_map: dict, parse_func: callable) -> list:
     return data
 
 
-data = get_data(new_england_map, parse_msw_stars)
+def insert_into_msw_stars(data: list) -> None:
+    try:
+        db_name = 'surf_map.db'
+        con = sqlite3.connect(db_name)
+        cur = con.cursor()
+        cur.execute("CREATE TABLE IF NOT EXISTS msw_stars(spot, date, time, surf_ht, stars_dark, stars_light, "
+                    "stars_empty)")
+        cur.executemany("INSERT INTO msw_stars VALUES(?, ?, ?, ?, ?, ?, ?)", data)
+        con.commit()
+    except sqlite3.Error as error:
+        print("Failed to insert Python variable into sqlite table", error)
+    finally:
+        if con:
+            con.close()
+        return
 
-db_name = 'surf_map.db'
-con = sqlite3.connect(db_name)
-cur = con.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS msw_stars(spot, date, time, surf_ht, stars_dark, stars_light, stars_empty)")
 
-cur.executemany("INSERT INTO msw_stars VALUES(?, ?, ?, ?, ?, ?, ?)", data)
-con.commit()
-con.close()
+if __name__ == '__main__':
+    msw_stars_data = get_data(new_england_map, parse_msw_stars)
+    insert_into_msw_stars(msw_stars_data)
