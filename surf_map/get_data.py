@@ -16,7 +16,13 @@ new_england_map = {
 }
 
 
-def parse_msw_stars(url):
+def parse_msw_stars(url: str) -> tuple:
+    """
+    Parses magic seaweed url's html to find surf height and star ratings.
+
+    :param url: (str) a Magic Seaweed surf report website.
+    :return: (tuple) of (current wave height (str), dark stars, light stars, empty stars)
+    """
     response = requests.get(url)
     if not response:
         return None, -1, -1, -1
@@ -32,6 +38,8 @@ def parse_msw_stars(url):
 
 def get_data(spot_map: dict, parse_func: callable) -> list:
     """
+    Applies a parsing function to scrape data from a website and adds metadata.
+
     :param spot_map: (dict) mapping from spot name or other label to the URL to scrape.
     :param parse_func: (callable) function that accepts a URL and returns a tuple of values to add to the returned data
     :return: (list) a list of tuples containing (spot name, current date, current time, and values from parse func)
@@ -47,6 +55,13 @@ def get_data(spot_map: dict, parse_func: callable) -> list:
 
 
 def insert_into_msw_stars(data: list) -> None:
+    """
+    Inserts MSW stars data into a sqlite db.
+
+    :param data: (list) list of tuples to insert into db.
+        Each tuple fills a row of columns: (spot, date, time, surf_ht, stars_dark, stars_light, stars_empty)
+    :return: None
+    """
     try:
         db_name = 'surf_map.db'
         con = sqlite3.connect(db_name)
