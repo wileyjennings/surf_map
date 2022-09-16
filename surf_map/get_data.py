@@ -5,14 +5,18 @@ import requests
 from bs4 import BeautifulSoup
 
 new_england_map = {
+    'Long Beach': 'https://magicseaweed.com/Long-Beach-Surf-Guide/383/',
+    'Ditch Plains': 'https://magicseaweed.com/Ditch-Plains-Surf-Report/2159/',
+    'Narragansett Beach': 'https://magicseaweed.com/Narragansett-Beach-Surf-Report/1103/',
+    '2nd Beach': 'https://magicseaweed.com/2nd-Beach-Sachuest-Beach-Surf-Report/846/',
+    'Nahant': 'https://magicseaweed.com/Nahant-Surf-Report/1091/',
     'Good Harbor Beach': 'https://magicseaweed.com/Good-Harbor-Beach-Surf-Report/9268/',
     'Cape Ann': 'https://magicseaweed.com/Cape-Ann-Surf-Report/370/',
-    'Nahant': 'https://magicseaweed.com/Nahant-Surf-Report/1091/',
     'The Wall': 'https://magicseaweed.com/The-Wall-Surf-Report/369/',
     'Hampton Beach': 'https://magicseaweed.com/Hampton-Beach-Surf-Report/2074/',
     'Jenness Beach': 'https://magicseaweed.com/Jenness-Beach-Surf-Report/881/',
-    '2nd Beach': 'https://magicseaweed.com/2nd-Beach-Sachuest-Beach-Surf-Report/846/',
-    'Narragansett Beach': 'https://magicseaweed.com/Narragansett-Beach-Surf-Report/1103/'
+    'Long Sands': 'https://magicseaweed.com/Long-Sands-Surf-Report/367/',
+    'Short Sands': 'https://magicseaweed.com/Short-Sands-Surf-Report/366/',
 }
 
 
