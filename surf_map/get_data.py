@@ -63,7 +63,7 @@ def insert_into_msw_stars(data: list) -> None:
     :return: None
     """
     try:
-        db_name = 'surf_map.db'
+        db_name = '/home/wileyjennings/surf_map/surf_map.db'
         con = sqlite3.connect(db_name)
         cur = con.cursor()
         cur.execute("CREATE TABLE IF NOT EXISTS msw_stars(spot, date, time, surf_ht, stars_dark, stars_light, "
