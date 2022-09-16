@@ -70,12 +70,14 @@ def insert_into_msw_stars(data: list) -> None:
     """
     db_name = '/home/wileyjennings/surf_map/surf_map/data/surf_map.db'
     con = sqlite3.connect(db_name)
-    cur = con.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS msw_stars(spot, date, time, surf_ht, stars_dark, stars_light, "
-                "stars_empty)")
-    cur.executemany("INSERT INTO msw_stars VALUES(?, ?, ?, ?, ?, ?, ?)", data)
-    con.commit()
-    con.close()
+    try:
+        cur = con.cursor()
+        cur.execute("CREATE TABLE IF NOT EXISTS msw_stars(spot, date, time, surf_ht, stars_dark, stars_light, "
+                    "stars_empty)")
+        cur.executemany("INSERT INTO msw_stars VALUES(?, ?, ?, ?, ?, ?, ?)", data)
+        con.commit()
+    finally:
+        con.close()
     return
 
 
