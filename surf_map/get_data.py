@@ -33,6 +33,8 @@ def parse_msw_stars(url: str) -> tuple:
     wp = response.text
     soup = BeautifulSoup(wp, 'html.parser')
     star = soup.find(name='ul', class_='rating rating-large clearfix')
+    if star is None:
+        return None, -1, -1, -1
     surf_ht = star.find(name='li', class_='rating-text text-dark').getText().strip()
     stars_dark = len(star.findAll(name='li', class_='active'))
     stars_light = len(star.findAll(name='li', class_='inactive'))
