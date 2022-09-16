@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 new_england_map = {
-    'Long Beach': 'https://magicseaweed.com/Long-Beach-Surf-Guide/383/',
+    'Long Beach': 'https://magicseaweed.com/Long-Beach-Surf-Report/383/',
     'Ditch Plains': 'https://magicseaweed.com/Ditch-Plains-Surf-Report/2159/',
     'Narragansett Beach': 'https://magicseaweed.com/Narragansett-Beach-Surf-Report/1103/',
     '2nd Beach': 'https://magicseaweed.com/2nd-Beach-Sachuest-Beach-Surf-Report/846/',
